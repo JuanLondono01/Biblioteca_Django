@@ -1,0 +1,47 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/crearLibroFisico.css' %}" />
+        <title>Crear Libro</title>
+    </head>
+    <body>
+        <header>
+            <h1><a href="/">Crear Libro Fisico</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/crear_fisico">Crear Fisico</a></li>
+                    <li><a href="/crear_digital/">Crear Digital</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {%block content%}
+            <form method="post">
+                {% csrf_token %}
+                <label for="id_titulo">Titulo:</label>
+                {{form.titulo}}
+
+                <label for="id_autor">Autor:</label>
+                {{form.autor}}
+
+                <label for="id_anio_publicacion">Fecha de publicacion:</label>
+                {{form.anio_publicacion}}
+
+                <label for="id_num_paginas">Numero de paginas:</label>
+                {{form.num_paginas}}
+                
+                <button type="submit">Guardar</button>
+            </form>
+            {%endblock%}
+        </main>
+
+        <footer>
+            <p>&copy;2024. Todos los derechos reservados. Sistema Biblioteca</p>
+        </footer>
+    </body>
+</html>

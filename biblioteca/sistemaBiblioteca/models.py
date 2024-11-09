@@ -4,7 +4,7 @@ from django.db import models
 class Libro(models.Model):
     titulo = models.CharField(max_length=200)
     autor = models.CharField(max_length=100)
-    anio_publicacion = models.IntegerField()
+    anio_publicacion = models.DateField()
 
     class Meta:
         abstract = True  # Clase base abstracta para que no se cree una tabla "Libro"

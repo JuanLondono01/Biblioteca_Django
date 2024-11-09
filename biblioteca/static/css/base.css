@@ -39,3 +39,69 @@ header a{
     text-decoration: none;
     color: black;
 }
+
+
+.libros_fisicos, 
+.libros_digitales{
+    margin-top: 4rem;
+}
+
+.libros_fisicos h2,
+.libros_digitales h2{
+    text-align: center;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    padding-block: 2rem;
+}
+
+.sep{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.sep li{
+    list-style: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+}
+
+.libro_card {
+    display: flex;
+    background-color: #f4f4f4;
+    justify-content: space-around;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.libro_card p{
+    width: max-content;
+    padding-inline: 1rem;
+    width: 100%;
+    text-align: center;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+.libro_card{
+    border-right: 10px solid skyblue;
+}
+
+.libro_card p:last-child{
+}
+main{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    position: absolute;
+    width: 100%;
+}
