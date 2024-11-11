@@ -90,8 +90,6 @@ header a{
     border-right: 10px solid skyblue;
 }
 
-.libro_card p:last-child{
-}
 main{
     height: 100vh;
     overflow-y: scroll;
