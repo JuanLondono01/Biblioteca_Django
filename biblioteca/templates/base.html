@@ -19,24 +19,22 @@
             </nav>
         </header>
 
+        <div id="modal" class="modal">
+            <h3>Seleccione el tipo de libro</h3>
+            <div>
+                <input type="radio" name="type" class="radio" value="fisico" />
+                Fisico
+            </div>
+            <div>
+                <input type="radio" name="type" class="radio" value="digital" />
+                Digital
+            </div>
+
+            <div id="form-container" class="form"></div>
+            <button popovertarget="form" popovertargetaction="hide" class="close-btn">Cerrar</button>
+        </div>
         <main>
             {%block content%}
-            <div id="modal" class="modal">
-                <h3>Seleccione el tipo de libro</h3>
-                <div>
-                    <input type="radio" name="type" class="radio" value="fisico" />
-                    Fisico
-                </div>
-                <div>
-                    <input type="radio" name="type" class="radio" value="digital" />
-                    Digital
-                </div>
-
-                <div id="form-container" class="form">
-
-                </div>
-                <button popovertarget="form" popovertargetaction="hide" class='close-btn'>Cerrar</button>
-            </div>
             <div class="libros_fisicos">
                 <h2>Libros Físicos</h2>
                 <ul class="sep">

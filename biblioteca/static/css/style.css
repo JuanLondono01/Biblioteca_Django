@@ -90,9 +90,8 @@ header a{
     border-right: 10px solid skyblue;
 }
 
-main{
-    height: 100vh;
-    overflow-y: scroll;
+.modal.active + main{
+    filter: blur(8px);
 }
 
 footer {
