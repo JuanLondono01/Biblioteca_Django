@@ -4,7 +4,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        <script src="{%static 'js/form.js'%}"></script>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
         <title>Inicio</title>
     </head>
     <body>
@@ -13,15 +14,29 @@
             <nav>
                 <ul>
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="crear_fisico/">Crear Fisico</a></li>
-                    <li><a href="crear_digital/">Crear Digital</a></li>
+                    <button id="show-form">Agregar libro</button>
                 </ul>
             </nav>
         </header>
 
         <main>
             {%block content%}
+            <div id="modal" class="modal">
+                <h3>Seleccione el tipo de libro</h3>
+                <div>
+                    <input type="radio" name="type" class="radio" value="fisico" />
+                    Fisico
+                </div>
+                <div>
+                    <input type="radio" name="type" class="radio" value="digital" />
+                    Digital
+                </div>
 
+                <div id="form-container" class="form">
+
+                </div>
+                <button popovertarget="form" popovertargetaction="hide" class='close-btn'>Cerrar</button>
+            </div>
             <div class="libros_fisicos">
                 <h2>Libros Físicos</h2>
                 <ul class="sep">
