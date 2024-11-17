@@ -4,8 +4,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://kit.fontawesome.com/499df900a3.js" crossorigin="anonymous"></script>
         <script src="{%static 'js/form.js'%}"></script>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
         <title>Inicio</title>
     </head>
     <body>
@@ -37,23 +38,27 @@
             {%block content%}
             <div class="libros_fisicos">
                 <h2>Libros Físicos</h2>
-                <ul class="sep">
+                <ul class="sep-fis">
                     <li>Titulo</li>
                     <li>Autor</li>
-                    <li>Año de publicacion</li>
-                    <li>Numero de Paginas</li>
+                    <li>Fecha</li>
+                    <li>Paginas</li>
                 </ul>
                 <ul>
                     {% for libro in libros_fisicos %}
                     <li class="libro_card">
                         <p>{{ libro.titulo }}</p>
-                        <br />
                         <p>{{ libro.autor }}</p>
-                        <br />
                         <p>{{ libro.anio_publicacion }}</p>
-                        <br />
                         <p>{{ libro.num_paginas }}</p>
-                        <br />
+                        <div class="opts">
+                            <a href="{% url 'editar_libro' libro.id 'fisico' %}">
+                                <i class="fa-solid fa-pen-to-square fa-2xl" style="color: #74c0fc"></i>
+                            </a>
+                            <a href="{% url 'eliminar_libro' libro.id 'fisico' %}">
+                                <i class="fa-solid fa-trash fa-2xl" style="color: #ff0000"></i>
+                            </a>
+                        </div>
                     </li>
                     {% empty %}
                     <li>No hay libros físicos disponibles.</li>
@@ -63,26 +68,29 @@
 
             <div class="libros_digitales">
                 <h2>Libros Digitales</h2>
-                <ul class="sep">
+                <ul class="sep-dig">
                     <li>Titulo</li>
                     <li>Autor</li>
-                    <li>Año de publicacion</li>
+                    <li>Fecha</li>
                     <li>Tamaño</li>
                     <li>Formato</li>
                 </ul>
                 <ul>
                     {% for libro in libros_digitales %}
-                    <li class="libro_card">
+                    <li class="libro_card_dig">
                         <p>{{ libro.titulo }}</p>
-                        <br />
                         <p>{{ libro.autor }}</p>
-                        <br />
                         <p>{{ libro.anio_publicacion }}</p>
-                        <br />
                         <p>{{ libro.tamanio_mb }} MB</p>
-                        <br />
                         <p>{{ libro.formato }}</p>
-                        <br />
+                        <div class="opts">
+                            <a href="{% url 'editar_libro' libro.id 'digital' %}">
+                                <i class="fa-solid fa-pen-to-square fa-2xl" style="color: #74c0fc"></i>
+                            </a>
+                            <a href="{% url 'eliminar_libro' libro.id 'digital' %}">
+                                <i class="fa-solid fa-trash fa-2xl" style="color: #ff0000"></i>
+                            </a>
+                        </div>
                     </li>
                     {% empty %}
                     <li>No hay libros digitales disponibles.</li>

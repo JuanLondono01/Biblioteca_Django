@@ -22,13 +22,45 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(`/?type=${selectedType}`, {
                 method: 'GET',
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'  // Indicar que es una solicitud AJAX
-                }
+                    'X-Requested-With': 'XMLHttpRequest', // Indicar que es una solicitud AJAX
+                },
             })
-            .then(response => response.text())
-            .then(html => {
-                formContainer.innerHTML = html;  // Insertar el formulario en el contenedor
-            });
+                .then((response) => response.text())
+                .then((html) => {
+                    formContainer.innerHTML = html; // Insertar el formulario en el contenedor
+                });
         });
+    });
+});
+
+document.querySelectorAll('.edit-button').forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const libroId = event.target.dataset.libroId;
+        const tipo = event.target.dataset.tipo;
+
+        fetch(`/editar/${libroId}/${tipo}/`, {
+            method: 'GET',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        })
+            .then((response) => response.text())
+            .then((html) => {
+                document.getElementById('form-container').innerHTML = html;
+            });
+    });
+});
+
+document.querySelectorAll('.delete-button').forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const libroId = event.target.dataset.libroId;
+        const tipo = event.target.dataset.tipo;
+
+        if (confirm('¿Estás seguro de que deseas eliminar este libro?')) {
+            fetch(`/eliminar/${libroId}/${tipo}/`, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': csrftoken }, 
+            }).then(() => {
+                location.reload(); // Recargar la página después de eliminar
+            });
+        }
     });
 });

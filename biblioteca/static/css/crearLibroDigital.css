@@ -92,3 +92,8 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+header {
+    text-align: center;
+    font-size: 2rem;
+}
