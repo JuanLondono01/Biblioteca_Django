@@ -26,7 +26,62 @@ def index(request):
                 "/"
             )  # Redirigir a la página principal después de guardar el libro
 
-    else:
+    else:from django import forms
+from .models import LibroFisico, LibroDigital
+
+
+class LibroFisicoForm(forms.ModelForm):
+    class Meta:
+        model = LibroFisico
+        fields = [LibroFisico.get_titulo(), LibroFisico.get_autor(), LibroFisico.get_fecha(), LibroFisico.get_paginas()]
+        widgets = {
+            "titulo": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "autor": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "anio_publicacion": forms.DateInput(
+                attrs={"class": "input-field", "type": "date", "autocomplete": "off"}
+            ),
+            "num_paginas": forms.NumberInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+        }
+
+
+class LibroDigitalForm(forms.ModelForm):
+    formatos_libros = [
+        ('', '--Selecciona--'),
+        ("pdf", "PDF"),
+        ("epub", "EPUB"),
+        ("mobi", "MOBI"),
+        ("txt", "TXT"),
+    ]
+
+    class Meta:
+        model = LibroDigital
+        fields = [LibroDigital.get_titulo(), LibroDigital.get_autor(), LibroDigital.get_fecha(), LibroDigital.get_formato(), LibroDigital.get_size()]
+        widgets = {
+            "titulo": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "autor": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "anio_publicacion": forms.DateInput(
+                attrs={"class": "input-field", "type": "date"}
+            ),
+            "formato": forms.Select(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "tamanio_mb": forms.NumberInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+        }
+
+    formato = forms.ChoiceField(choices=formatos_libros)
+
         # Si la solicitud no es un POST, simplemente cargar los formularios vacíos según el tipo
         tipo_libro = request.GET.get(
             "type"

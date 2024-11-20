@@ -1,11 +1,10 @@
 from django import forms
 from .models import LibroFisico, LibroDigital
 
-
 class LibroFisicoForm(forms.ModelForm):
     class Meta:
         model = LibroFisico
-        fields = ["titulo", "autor", "anio_publicacion", "num_paginas"]
+        fields = ['titulo', 'autor', 'anio_publicacion', 'num_paginas']  # Usar los nombres de campo correctos
         widgets = {
             "titulo": forms.TextInput(
                 attrs={"class": "input-field", "autocomplete": "off"}
@@ -22,6 +21,7 @@ class LibroFisicoForm(forms.ModelForm):
         }
 
 
+
 class LibroDigitalForm(forms.ModelForm):
     formatos_libros = [
         ('', '--Selecciona--'),
@@ -33,7 +33,7 @@ class LibroDigitalForm(forms.ModelForm):
 
     class Meta:
         model = LibroDigital
-        fields = ["titulo", "autor", "anio_publicacion", "formato", "tamanio_mb"]
+        fields = ['titulo', 'autor', 'anio_publicacion', 'formato', 'tamanio_mb']  # Usar los nombres de campo correctos
         widgets = {
             "titulo": forms.TextInput(
                 attrs={"class": "input-field", "autocomplete": "off"}
