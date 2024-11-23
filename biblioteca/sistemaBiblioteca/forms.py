@@ -1,7 +1,6 @@
 from django import forms
 from .models import LibroFisico, LibroDigital
 
-
 class LibroFisicoForm(forms.ModelForm):
     titulo = forms.CharField(max_length=200, label="Titulo")
     autor = forms.CharField(max_length=100, label="Autor")
@@ -35,6 +34,22 @@ class LibroFisicoForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+        fields = ['titulo', 'autor', 'anio_publicacion', 'num_paginas']  # Usar los nombres de campo correctos
+        widgets = {
+            "titulo": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "autor": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "anio_publicacion": forms.DateInput(
+                attrs={"class": "input-field", "type": "date", "autocomplete": "off"}
+            ),
+            "num_paginas": forms.NumberInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+        }
+
 
 
 class LibroDigitalForm(forms.ModelForm):
@@ -85,3 +100,23 @@ class LibroDigitalForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+        fields = ['titulo', 'autor', 'anio_publicacion', 'formato', 'tamanio_mb']  # Usar los nombres de campo correctos
+        widgets = {
+            "titulo": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "autor": forms.TextInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "anio_publicacion": forms.DateInput(
+                attrs={"class": "input-field", "type": "date"}
+            ),
+            "formato": forms.Select(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+            "tamanio_mb": forms.NumberInput(
+                attrs={"class": "input-field", "autocomplete": "off"}
+            ),
+        }
+
+    formato = forms.ChoiceField(choices=formatos_libros)

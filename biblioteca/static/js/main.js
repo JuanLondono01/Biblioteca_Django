@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: method,
             body: formData,
         })
+<<<<<<<< HEAD:biblioteca/static/js/main.js
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
@@ -74,6 +75,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error en la solicitud:', error);
                 alert('Ocurrió un error al procesar la solicitud.');
             });
+========
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Libro guardado exitosamente.');
+                form.reset();  // Limpiar el formulario después de guardar
+                modal.classList.remove('active');  // Cerrar el modal
+                formContainer.innerHTML = '';  // Limpiar el formulario cargado
+                window.location.href = data.redirect_url //Redirije / recarga automaticamente
+            } else {
+                alert('Error al guardar el libro.');
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            alert('Ocurrió un error al procesar la solicitud.');
+        });
+>>>>>>>> main:biblioteca/static/js/form.js
     }
     
 });

@@ -64,7 +64,7 @@ form textarea {
 /* Estilo para el botón de enviar */
 form button {
     padding: 10px 15px;
-    background-color: #4caf50;
+    background-color: skyblue;
     color: white;
     border: none;
     border-radius: 4px;
@@ -74,7 +74,7 @@ form button {
 
 /* Cambio de color cuando el botón se pasa el mouse por encima */
 form button:hover {
-    background-color: #45a049;
+    background-color: skyblue;
 }
 
 /* Estilo para los parágrafos generados por form.as_p */

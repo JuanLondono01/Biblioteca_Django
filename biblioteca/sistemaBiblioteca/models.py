@@ -34,14 +34,8 @@ class Libro(models.Model):
     def anio_publicacion(self, value):
         self._anio_publicacion = value
 
-    class Meta:
-        abstract = True  # Clase abstracta para no crear una tabla 'Libro'
-
     def mostrar_info(self):
-        return (
-            f"Título: {self.titulo}, Autor: {self.autor}, Año de publicación: {self.anio_publicacion}"
-        )
-
+        return f"Título: {self.get_titulo()}, Autor: {self.get_autor()}, Año de publicación: {self.get_fecha()}"
 
 # Modelo para libros físicos
 class LibroFisico(Libro):
@@ -57,8 +51,7 @@ class LibroFisico(Libro):
         self._num_paginas = paginas
 
     def mostrar_info(self):
-        return f"{super().mostrar_info()}, Número de páginas: {self.num_paginas}"
-
+        return f"{super().mostrar_info()}, Número de páginas: {self.get_paginas()}"
 
 # Modelo para libros digitales 
 class LibroDigital(Libro):
@@ -84,4 +77,4 @@ class LibroDigital(Libro):
         self._tamanio_mb = value
 
     def mostrar_info(self):
-        return f"{super().mostrar_info()}, Tamaño: {self.tamanio_mb} MB, Formato: {self.formato}"
+        return f"{super().mostrar_info()}, Tamaño: {self.get_size()} MB, Formato: {self.get_formato()}"

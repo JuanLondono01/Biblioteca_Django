@@ -30,7 +30,10 @@ def index(request):
             return redirect("/")
 
     else:
-        tipo_libro = request.GET.get("type")
+        # Si la solicitud no es un POST, simplemente cargar los formularios vacíos según el tipo
+        tipo_libro = request.GET.get(
+            "type"
+        )  # Obtener el tipo de libro desde los parámetros GET
         if tipo_libro == "fisico":
             form = LibroFisicoForm()
             template = "formulario-fisico.html"
@@ -67,6 +70,32 @@ def guardar_libro_digital(request):
         if form.is_valid():
             form.save()
             return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección 
+        else:
+            return JsonResponse({"success": False, "errors": form.errors})
+    return JsonResponse({"success": False, "message": "Método no permitido"})
+
+
+def guardar_libro_fisico(request):
+    if request.method == "POST":
+        form = LibroFisicoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse(
+                {"success": True, "redirect_url": "/"}
+            )  # Indicar la redirección
+        else:
+            return JsonResponse({"success": False, "errors": form.errors})
+    return JsonResponse({"success": False, "message": "Método no permitido"})
+
+
+def guardar_libro_digital(request):
+    if request.method == "POST":
+        form = LibroDigitalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse(
+                {"success": True, "redirect_url": "/"}
+            )  # Indicar la redirección
         else:
             return JsonResponse({"success": False, "errors": form.errors})
     return JsonResponse({"success": False, "message": "Método no permitido"})
