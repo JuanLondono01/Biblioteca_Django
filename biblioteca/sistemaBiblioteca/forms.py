@@ -11,7 +11,6 @@ class LibroFisicoForm(forms.ModelForm):
 
     class Meta:
         model = LibroFisico
-<<<<<<< HEAD
         fields = ["titulo", "autor", "anio_publicacion", "num_paginas"]
 
     def __init__(self, *args, **kwargs):
@@ -35,7 +34,6 @@ class LibroFisicoForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
-=======
         fields = ['titulo', 'autor', 'anio_publicacion', 'num_paginas']  # Usar los nombres de campo correctos
         widgets = {
             "titulo": forms.TextInput(
@@ -51,7 +49,6 @@ class LibroFisicoForm(forms.ModelForm):
                 attrs={"class": "input-field", "autocomplete": "off"}
             ),
         }
->>>>>>> f10f742f6d1454857d1835752cabbd66fd5bf947
 
 
 
@@ -89,7 +86,6 @@ class LibroDigitalForm(forms.ModelForm):
 
     class Meta:
         model = LibroDigital
-<<<<<<< HEAD
         fields = ["titulo", "autor", "anio_publicacion", "formato", "tamanio_mb"]
 
     def save(self, commit=True):
@@ -104,7 +100,6 @@ class LibroDigitalForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
-=======
         fields = ['titulo', 'autor', 'anio_publicacion', 'formato', 'tamanio_mb']  # Usar los nombres de campo correctos
         widgets = {
             "titulo": forms.TextInput(
@@ -125,4 +120,3 @@ class LibroDigitalForm(forms.ModelForm):
         }
 
     formato = forms.ChoiceField(choices=formatos_libros)
->>>>>>> f10f742f6d1454857d1835752cabbd66fd5bf947
