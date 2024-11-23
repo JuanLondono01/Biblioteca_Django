@@ -53,6 +53,27 @@ def index(request):
         },
     )
 
+def guardar_libro_fisico(request):
+    if request.method == "POST":
+        form = LibroFisicoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección
+        else:
+            return JsonResponse({"success": False, "errors": form.errors})
+    return JsonResponse({"success": False, "message": "Método no permitido"})
+
+
+def guardar_libro_digital(request):
+    if request.method == "POST":
+        form = LibroDigitalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección 
+        else:
+            return JsonResponse({"success": False, "errors": form.errors})
+    return JsonResponse({"success": False, "message": "Método no permitido"})
+
 
 def guardar_libro_fisico(request):
     if request.method == "POST":

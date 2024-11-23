@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://kit.fontawesome.com/499df900a3.js" crossorigin="anonymous"></script>
         <script src="{%static 'js/main.js'%}"></script>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
         <title>Inicio</title>
     </head>
     <body>
@@ -15,7 +15,7 @@
             <nav>
                 <ul>
                     <li><a href="/">Inicio</a></li>
-                    <li class="search-link"><a href="{% url 'buscar_libros' %}">Buscar Libros</a></li>
+                    <li><a href="{% url 'buscar_libros' %}">Buscar Libros</a></li>
                     <button id="show-form">Agregar libro</button>
                 </ul>
             </nav>
@@ -108,3 +108,4 @@
         </footer>
     </body>
 </html>
+<!--  -->

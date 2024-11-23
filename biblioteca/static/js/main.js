@@ -51,12 +51,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
         const url = type === 'fisico' ? '/guardar_libro_fisico/' : '/guardar_libro_digital/';
         const method = form.method;
-
+    
         // Realizar solicitud AJAX para guardar el libro
         fetch(url, {
             method: method,
             body: formData,
         })
+<<<<<<<< HEAD:biblioteca/static/js/main.js
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Libro guardado exitosamente.');
+                    modal.classList.remove('active');  // Cerrar el modal
+                    formContainer.innerHTML = '';  // Limpiar el formulario cargado
+                    // Redirigir automáticamente
+                    window.location.href = data.redirect_url;  // Recargar la página 
+                } else {
+                    alert('Error al guardar el libro.');
+                    console.error('Errores del formulario:', data.errors);
+                }
+            })
+            .catch(error => {
+                console.error('Error en la solicitud:', error);
+                alert('Ocurrió un error al procesar la solicitud.');
+            });
+========
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -73,5 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error en la solicitud:', error);
             alert('Ocurrió un error al procesar la solicitud.');
         });
+>>>>>>>> main:biblioteca/static/js/form.js
     }
+    
 });
