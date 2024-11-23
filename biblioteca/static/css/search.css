@@ -46,6 +46,7 @@ form button:hover {
     height: max-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
 }
 .tarjeta-resultado {
     width: 400px;

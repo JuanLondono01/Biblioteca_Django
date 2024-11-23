@@ -39,18 +39,17 @@ header a {
     color: black;
 }
 
-main{
-    margin-bottom: 6rem;
+main {
+    height: 100dvh;
 }
 
 .libros_fisicos,
 .libros_digitales {
-    margin-top: 4rem;
+    height: 12rem;
     overflow-y: scroll;
 }
 
-.libros_fisicos h2,
-.libros_digitales h2 {
+h2 {
     text-align: center;
     font-size: 2.5rem;
     text-transform: uppercase;
