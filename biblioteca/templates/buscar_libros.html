@@ -1,0 +1,70 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{%static 'css/search.css'%}" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1>Sistema biblioteca</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="{% url 'buscar_libros' %}">Buscar Libros</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block content %}
+            <form method="GET" action="{% url 'buscar_libros' %}">
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Buscar por título o autor"
+                    autocomplete="off" />
+                <button type="submit">Buscar</button>
+            </form>
+
+            <style></style>
+
+            {% if query %}
+            <h2 class="res-response">Resultados para "{{ query }}"</h2>
+
+            <h3>Libros Físicos</h3>
+            <ul class="resultados_busqueda">
+                {% for libro in resultados_fisicos %}
+                <li class="tarjeta-resultado">
+                    <strong>{{ libro.titulo }}</strong>
+                    Escrito por
+                    <strong>{{ libro.autor }}</strong>
+                    <p class="edit-btn"><a href="{% url 'editar_libro' libro.id 'fisico' %}">Editar</a></p>
+                </li>
+                {% empty %}
+                <li>No se encontraron libros físicos.</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Libros Digitales</h3>
+            <ul class="resultados_busqueda">
+                {% for libro in resultados_digitales %}
+                <li class="tarjeta-resultado">
+                    <strong>{{ libro.titulo }}</strong>
+                    Escrito por
+                    <strong>{{ libro.autor }}</strong>
+                    <p class="edit-btn"><a href="{% url 'editar_libro' libro.id 'digital' %}">Editar</a></p>
+                </li>
+                {% empty %}
+                <li>No se encontraron libros digitales.</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endblock %}
+        </main>
+        <footer>
+            <p>&copy;2024. Todos los derechos reservados. Sistema Biblioteca</p>
+        </footer>
+    </body>
+</html>

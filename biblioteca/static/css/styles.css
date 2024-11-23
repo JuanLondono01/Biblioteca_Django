@@ -3,7 +3,8 @@
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
-    font-family: "Sour Gummy", sans-serif;
+    font-family: 'Sour Gummy', sans-serif;
+    font-family: 'Sour Gummy', sans-serif;
 }
 
 header {
@@ -28,6 +29,8 @@ header li {
     border-radius: 6px;
     display: flex;
     align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 header li:nth-child(1) {
@@ -43,12 +46,18 @@ header a {
     color: black;
 }
 
+main {
+    margin-bottom: 6rem;
+}
+
 .libros_fisicos,
 .libros_digitales {
     margin-top: 4rem;
+    overflow-y: scroll;
+    height: 1rem;
 }
 
-.libros_digitales{
+.libros_digitales {
     margin-bottom: 4rem;
 }
 
@@ -74,6 +83,20 @@ header a {
     font-weight: bold;
     width: 100%;
 }
+.sep-fis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.sep-fis li {
+    list-style: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+}
 
 .sep-dig {
     display: grid;
@@ -85,6 +108,7 @@ header a {
 .sep-dig li {
     list-style: none;
     text-align: center;
+    text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
     width: 100%;
@@ -92,6 +116,13 @@ header a {
 
 .opts {
     display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.libro_card {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 4rem;
     justify-content: center;
 }
@@ -119,6 +150,28 @@ header a {
     border-right: 10px solid skyblue;
 }
 
+.libro_card_dig {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: #f4f4f4;
+    justify-content: space-around;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.libro_card_dig p {
+    width: max-content;
+    padding-inline: 1rem;
+    width: 100%;
+    text-align: center;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+.libro_card_dig {
+    border-right: 10px solid skyblue;
+}
 .libro_card_dig {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -176,6 +229,7 @@ footer {
     background-color: transparent;
     border: 1px solid skyblue;
     cursor: pointer;
+    transition: 0.2s ease;
     transition: 0.2s ease;
 }
 
@@ -244,8 +298,10 @@ form input[type='number']::-webkit-inner-spin-button {
     height: 2rem;
     padding: 1rem;
     padding-block: 2rem;
+    padding-block: 2rem;
     text-align: center;
     border-radius: 6px;
+    background-color: skyblue;
     background-color: skyblue;
     border: 1px solid skyblue;
     cursor: pointer;
