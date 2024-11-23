@@ -24,6 +24,9 @@ header li {
     list-style: none;
     padding-inline: 1rem;
     border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header li:nth-child(1) {
@@ -32,6 +35,7 @@ header li:nth-child(1) {
 
 header li:nth-child(1) a {
     color: white;
+
 }
 
 header a {
@@ -39,18 +43,30 @@ header a {
     color: black;
 }
 
+
+.search-link{
+    background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-link a{
+    color: white;
+}
+
 main{
     margin-bottom: 6rem;
+    height: 90dvh;
 }
 
 .libros_fisicos,
 .libros_digitales {
-    margin-top: 4rem;
     overflow-y: scroll;
+    height: 12rem;
 }
 
-.libros_fisicos h2,
-.libros_digitales h2 {
+h2 {
     text-align: center;
     font-size: 2.5rem;
     text-transform: uppercase;
@@ -149,7 +165,7 @@ footer {
     color: white;
     position: absolute;
     width: 100%;
-    margin-top: 3rem;
+
 }
 
 .modal {
@@ -239,12 +255,15 @@ form input[type='number']::-webkit-inner-spin-button {
 #show-form {
     display: flex;
     align-items: center;
-    height: 2rem;
+    height: 3rem;
     padding: 1rem;
     text-align: center;
     border-radius: 6px;
     background-color: transparent;
     border: 1px solid skyblue;
+    background-color: skyblue;
     cursor: pointer;
     transition: 0.2s ease;
+    font-size: 1.5rem;
+    color: white;
 }

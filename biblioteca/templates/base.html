@@ -5,8 +5,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://kit.fontawesome.com/499df900a3.js" crossorigin="anonymous"></script>
-        <script src="{%static 'js/form.js'%}"></script>
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <script src="{%static 'js/main.js'%}"></script>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
         <title>Inicio</title>
     </head>
     <body>
@@ -15,7 +15,7 @@
             <nav>
                 <ul>
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="{% url 'buscar_libros' %}">Buscar Libros</a></li>
+                    <li class="search-link"><a href="{% url 'buscar_libros' %}">Buscar Libros</a></li>
                     <button id="show-form">Agregar libro</button>
                 </ul>
             </nav>
@@ -38,14 +38,14 @@
         </div>
         <main>
             {%block content%}
+            <h2>Libros Físicos</h2>
+            <ul class="sep-fis">
+                <li>Titulo</li>
+                <li>Autor</li>
+                <li>Fecha</li>
+                <li>Paginas</li>
+            </ul>
             <div class="libros_fisicos">
-                <h2>Libros Físicos</h2>
-                <ul class="sep-fis">
-                    <li>Titulo</li>
-                    <li>Autor</li>
-                    <li>Fecha</li>
-                    <li>Paginas</li>
-                </ul>
                 <ul>
                     {% for libro in libros_fisicos %}
                     <li class="libro_card">
@@ -68,15 +68,15 @@
                 </ul>
             </div>
 
+            <h2>Libros Digitales</h2>
+            <ul class="sep-dig">
+                <li>Titulo</li>
+                <li>Autor</li>
+                <li>Fecha</li>
+                <li>Tamaño</li>
+                <li>Formato</li>
+            </ul>
             <div class="libros_digitales">
-                <h2>Libros Digitales</h2>
-                <ul class="sep-dig">
-                    <li>Titulo</li>
-                    <li>Autor</li>
-                    <li>Fecha</li>
-                    <li>Tamaño</li>
-                    <li>Formato</li>
-                </ul>
                 <ul>
                     {% for libro in libros_digitales %}
                     <li class="libro_card_dig">

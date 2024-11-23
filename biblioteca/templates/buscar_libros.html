@@ -12,7 +12,7 @@
             <h1>Sistema biblioteca</h1>
             <nav>
                 <ul>
-                    <li><a href='/'>Inicio</a></li>
+                    <li><a href="/">Inicio</a></li>
                     <li><a href="{% url 'buscar_libros' %}">Buscar Libros</a></li>
                 </ul>
             </nav>
@@ -32,7 +32,7 @@
             <style></style>
 
             {% if query %}
-            <h2 class='res-response'>Resultados para "{{ query }}"</h2>
+            <h2 class="res-response">Resultados para "{{ query }}"</h2>
 
             <h3>Libros Físicos</h3>
             <ul class="resultados_busqueda">
@@ -63,5 +63,8 @@
             </ul>
             {% endif %} {% endblock %}
         </main>
+        <footer>
+            <p>&copy;2024. Todos los derechos reservados. Sistema Biblioteca</p>
+        </footer>
     </body>
 </html>

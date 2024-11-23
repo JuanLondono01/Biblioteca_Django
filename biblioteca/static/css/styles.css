@@ -47,6 +47,7 @@ main{
 .libros_digitales {
     margin-top: 4rem;
     overflow-y: scroll;
+    height: 1rem;
 }
 
 .libros_fisicos h2,

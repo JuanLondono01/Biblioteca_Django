@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LibroFisicoForm, LibroDigitalForm
 from django.db.models import Q
 from .models import LibroFisico, LibroDigital
+from django.http import JsonResponse
 
 
 def index(request):
@@ -49,6 +50,27 @@ def index(request):
         },
     )
 
+
+def guardar_libro_fisico(request):
+    if request.method == "POST":
+        form = LibroFisicoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección
+        else:
+            return JsonResponse({"success": False, "errors": form.errors})
+    return JsonResponse({"success": False, "message": "Método no permitido"})
+
+
+def guardar_libro_digital(request):
+    if request.method == "POST":
+        form = LibroDigitalForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección
+        else:
+            return JsonResponse({"success": False, "errors": form.errors})
+    return JsonResponse({"success": False, "message": "Método no permitido"})
 
 def editar_libro(request, libro_id, tipo):
     if tipo == "fisico":
