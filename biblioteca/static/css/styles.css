@@ -1,7 +1,12 @@
+<<<<<<< HEAD:biblioteca/static/css/styles.css
+=======
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+>>>>>>> f10f742f6d1454857d1835752cabbd66fd5bf947:biblioteca/static/css/style.css
 * {
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
+    font-family: "Sour Gummy", sans-serif;
 }
 
 header {
@@ -24,6 +29,8 @@ header li {
     list-style: none;
     padding-inline: 1rem;
     border-radius: 6px;
+    display: flex;
+    align-items: center;
 }
 
 header li:nth-child(1) {
@@ -39,15 +46,22 @@ header a {
     color: black;
 }
 
+<<<<<<< HEAD:biblioteca/static/css/styles.css
 main{
     margin-bottom: 6rem;
 }
 
+=======
+>>>>>>> f10f742f6d1454857d1835752cabbd66fd5bf947:biblioteca/static/css/style.css
 .libros_fisicos,
 .libros_digitales {
     margin-top: 4rem;
     overflow-y: scroll;
     height: 1rem;
+}
+
+.libros_digitales{
+    margin-bottom: 4rem;
 }
 
 .libros_fisicos h2,
@@ -241,10 +255,16 @@ form input[type='number']::-webkit-inner-spin-button {
     align-items: center;
     height: 2rem;
     padding: 1rem;
+    padding-block: 2rem;
     text-align: center;
     border-radius: 6px;
-    background-color: transparent;
+    background-color: skyblue;
     border: 1px solid skyblue;
     cursor: pointer;
     transition: 0.2s ease;
+<<<<<<< HEAD:biblioteca/static/css/styles.css
+=======
+    color: #ffffff;
+    font-size: 1.5rem;
+>>>>>>> f10f742f6d1454857d1835752cabbd66fd5bf947:biblioteca/static/css/style.css
 }
