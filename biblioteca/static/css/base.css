@@ -39,9 +39,14 @@ header a {
     color: black;
 }
 
+main{
+    margin-bottom: 6rem;
+}
+
 .libros_fisicos,
 .libros_digitales {
     margin-top: 4rem;
+    overflow-y: scroll;
 }
 
 .libros_fisicos h2,
@@ -144,7 +149,7 @@ footer {
     color: white;
     position: absolute;
     width: 100%;
-    bottom: 0;
+    margin-top: 3rem;
 }
 
 .modal {

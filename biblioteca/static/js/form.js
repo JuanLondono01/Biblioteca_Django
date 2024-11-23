@@ -1,66 +1,76 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     const showFormButton = document.getElementById('show-form');
     const modal = document.getElementById('modal');
     const formContainer = document.getElementById('form-container');
+    const closeModalButton = modal.querySelector('.close-btn');
     const radioButtons = document.querySelectorAll('.radio');
-
-    // Mostrar el modal al hacer clic en el botón "Agregar libro"
+    const typeRadio = document.querySelector('input[name="type"]');
+    
+    // Mostrar el modal cuando se hace clic en "Agregar libro"
     showFormButton.addEventListener('click', () => {
         modal.classList.add('active');
     });
 
-    // Cerrar el modal
-    const closeButton = modal.querySelector('button[popovertargetaction="hide"]');
-    closeButton.addEventListener('click', () => {
+    // Cerrar el modal cuando se hace clic en "Cerrar"
+    closeModalButton.addEventListener('click', () => {
         modal.classList.remove('active');
+        formContainer.innerHTML = '';  // Limpiar el contenido del formulario cuando se cierra
     });
 
-    // Cargar el formulario correspondiente según la selección del radio button
+    // Manejo de selección de tipo de libro (físico o digital)
     radioButtons.forEach((radio) => {
         radio.addEventListener('change', (event) => {
             const selectedType = event.target.value;
-            fetch(`/?type=${selectedType}`, {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest', // Indicar que es una solicitud AJAX
-                },
-            })
-                .then((response) => response.text())
-                .then((html) => {
-                    formContainer.innerHTML = html; // Insertar el formulario en el contenedor
-                });
+            loadForm(selectedType);  // Cargar el formulario según el tipo de libro
         });
     });
-});
 
-document.querySelectorAll('.edit-button').forEach((button) => {
-    button.addEventListener('click', (event) => {
-        const libroId = event.target.dataset.libroId;
-        const tipo = event.target.dataset.tipo;
-
-        fetch(`/editar/${libroId}/${tipo}/`, {
+    // Función para cargar el formulario correspondiente según el tipo de libro
+    function loadForm(type) {
+        fetch(`/?type=${type}`, {
             method: 'GET',
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest', // Indica que es una solicitud AJAX
+            },
         })
-            .then((response) => response.text())
-            .then((html) => {
-                document.getElementById('form-container').innerHTML = html;
+        .then((response) => response.text())
+        .then((html) => {
+            formContainer.innerHTML = html; // Insertar el formulario en el contenedor
+            formContainer.querySelector('form').addEventListener('submit', (e) => {
+                e.preventDefault();  // Prevenir el comportamiento por defecto del formulario
+                handleFormSubmit(e.target, type);  // Manejar la acción de enviar el formulario
             });
-    });
-});
+        })
+        .catch((error) => {
+            console.error('Error al cargar el formulario:', error);
+        });
+    }
 
-document.querySelectorAll('.delete-button').forEach((button) => {
-    button.addEventListener('click', (event) => {
-        const libroId = event.target.dataset.libroId;
-        const tipo = event.target.dataset.tipo;
+    // Función para manejar el envío del formulario
+    function handleFormSubmit(form, type) {
+        const formData = new FormData(form);
+        const url = type === 'fisico' ? '/guardar_libro_fisico/' : '/guardar_libro_digital/';
+        const method = form.method;
 
-        if (confirm('¿Estás seguro de que deseas eliminar este libro?')) {
-            fetch(`/eliminar/${libroId}/${tipo}/`, {
-                method: 'POST',
-                headers: { 'X-CSRFToken': csrftoken }, 
-            }).then(() => {
-                location.reload(); // Recargar la página después de eliminar
-            });
-        }
-    });
+        // Realizar solicitud AJAX para guardar el libro
+        fetch(url, {
+            method: method,
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Libro guardado exitosamente.');
+                form.reset();  // Limpiar el formulario después de guardar
+                modal.classList.remove('active');  // Cerrar el modal
+                formContainer.innerHTML = '';  // Limpiar el formulario cargado
+            } else {
+                alert('Error al guardar el libro.');
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            alert('Ocurrió un error al procesar la solicitud.');
+        });
+    }
 });

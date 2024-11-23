@@ -1,56 +1,47 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LibroFisicoForm, LibroDigitalForm
+from django.db.models import Q
 from .models import LibroFisico, LibroDigital
-from django.shortcuts import get_object_or_404
 
 
-# Vista para manejar la carga de libros y formularios
 def index(request):
     libros_fisicos = LibroFisico.objects.all()
     libros_digitales = LibroDigital.objects.all()
 
     form = None
-    # Si la solicitud es un POST, manejar la creación del libro
+    template = "base.html"
+
     if request.method == "POST":
-        tipo_libro = request.POST.get(
-            "type"
-        )  # Obtener el tipo de libro de la selección
+        tipo_libro = request.POST.get("type")
+
         if tipo_libro == "fisico":
             form = LibroFisicoForm(request.POST)
+            template = "formulario-fisico.html"
         elif tipo_libro == "digital":
             form = LibroDigitalForm(request.POST)
+            template = "formulario-digital.html"
+        else:
+            form = None
 
         if form and form.is_valid():
+            # Crear el objeto manualmente para garantizar compatibilidad con encapsulación
             form.save()
-            return redirect(
-                "/"
-            )  # Redirigir a la página principal después de guardar el libro
+            return redirect("/")
 
     else:
-        # Si la solicitud no es un POST, simplemente cargar los formularios vacíos según el tipo
-        tipo_libro = request.GET.get(
-            "type"
-        )  # Obtener el tipo de libro desde los parámetros GET
+        tipo_libro = request.GET.get("type")
         if tipo_libro == "fisico":
             form = LibroFisicoForm()
+            template = "formulario-fisico.html"
         elif tipo_libro == "digital":
             form = LibroDigitalForm()
+            template = "formulario-digital.html"
+        else:
+            form = None
 
-        # Verificar si es una solicitud AJAX
-        if request.headers.get("X-Requested-With") == "XMLHttpRequest":
-            # Solo renderizar el formulario sin la página completa
-            tipo_libro = request.GET.get(
-                "type"
-            )  # Obtener el tipo de libro desde los parámetros GET
-            if tipo_libro == "fisico":
-                return render(request, "formulario-fisico.html", {"form": form})
-            elif tipo_libro == "digital":
-                return render(request, "formulario-digital.html", {"form": form})
-
-    # Renderizar la página principal con la lista de libros
     return render(
         request,
-        "base.html",
+        template,
         {
             "libros_fisicos": libros_fisicos,
             "libros_digitales": libros_digitales,
@@ -69,13 +60,15 @@ def editar_libro(request, libro_id, tipo):
         form_class = LibroDigitalForm
         template = "formulario-digital.html"
     else:
-        return redirect("/")  # Redirigir si el tipo es inválido
+        return redirect("/")
 
     if request.method == "POST":
         form = form_class(request.POST, instance=libro)
-        if form.is_valid():
-            form.save()
-            return redirect("/")  # Redirigir a la página principal
+        if form and form.is_valid():
+            form.save()  # Guardar el libro directamente
+            return redirect("/")
+        else:
+            print(form.errors)
     else:
         form = form_class(instance=libro)
 
@@ -88,10 +81,35 @@ def eliminar_libro(request, libro_id, tipo):
     elif tipo == "digital":
         libro = get_object_or_404(LibroDigital, id=libro_id)
     else:
-        return redirect("/")  # Redirigir si el tipo es inválido
+        return redirect("/")
 
-    if request.method == "POST":  # Confirmar la eliminación
+    if request.method == "POST":
         libro.delete()
         return redirect("/")
 
     return render(request, "confirmDelete.html", {"libro": libro})
+
+
+def buscar_libros(request):
+    query = request.GET.get("q", "")  # Obtener el término de búsqueda
+    resultados_fisicos = []
+    resultados_digitales = []
+
+    if query:
+        # Buscar en ambos modelos utilizando las propiedades
+        resultados_fisicos = LibroFisico.objects.filter(
+            Q(_titulo__icontains=query) | Q(_autor__icontains=query)
+        )
+        resultados_digitales = LibroDigital.objects.filter(
+            Q(_titulo__icontains=query) | Q(_autor__icontains=query)
+        )
+
+    return render(
+        request,
+        "buscar_libros.html",
+        {
+            "query": query,
+            "resultados_fisicos": resultados_fisicos,
+            "resultados_digitales": resultados_digitales,
+        },
+    )
