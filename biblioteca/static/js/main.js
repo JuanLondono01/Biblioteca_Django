@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     modal.classList.remove('active');  // Cerrar el modal
                     formContainer.innerHTML = '';  // Limpiar el formulario cargado
                     // Redirigir automáticamente
-                    window.location.href = data.redirect_url;  // Recargar la página
+                    window.location.href = data.redirect_url;  // Recargar la página 
                 } else {
                     alert('Error al guardar el libro.');
                     console.error('Errores del formulario:', data.errors);

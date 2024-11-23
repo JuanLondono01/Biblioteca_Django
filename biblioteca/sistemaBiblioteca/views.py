@@ -66,7 +66,7 @@ def guardar_libro_digital(request):
         form = LibroDigitalForm(request.POST)
         if form.is_valid():
             form.save()
-            return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección
+            return JsonResponse({"success": True, "redirect_url": "/"})  # Indicar la redirección 
         else:
             return JsonResponse({"success": False, "errors": form.errors})
     return JsonResponse({"success": False, "message": "Método no permitido"})

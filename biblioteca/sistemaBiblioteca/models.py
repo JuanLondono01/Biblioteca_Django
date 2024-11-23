@@ -60,7 +60,7 @@ class LibroFisico(Libro):
         return f"{super().mostrar_info()}, Número de páginas: {self.num_paginas}"
 
 
-# Modelo para libros digitales
+# Modelo para libros digitales 
 class LibroDigital(Libro):
     _formato = models.CharField(max_length=50)
     _tamanio_mb = models.FloatField()

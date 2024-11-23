@@ -74,7 +74,7 @@ class LibroDigitalForm(forms.ModelForm):
         fields = ["titulo", "autor", "anio_publicacion", "formato", "tamanio_mb"]
 
     def save(self, commit=True):
-        # Sobrescribir save para usar propiedades
+        # Sobrescribir save para usar propiedades 
         instance = super().save(commit=False)
         instance.titulo = self.cleaned_data["titulo"]
         instance.autor = self.cleaned_data["autor"]
